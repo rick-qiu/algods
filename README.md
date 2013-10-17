@@ -1,4 +1,4 @@
 algods
 ======
 
-practice algorithms and data structure knowledge
+practice algorithms and data structures skills

@@ -7,4 +7,4 @@ fi
 echo ""
 echo "build $1 and run test cases..."
 echo ""
-$BUILD_CMD $1 -o test && ./test
+$BUILD_CMD $1 -o test && ./test && rm test

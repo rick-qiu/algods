@@ -19,6 +19,10 @@ namespace algods {
                 slnode<int>* slhead = nullptr;
                 build_linkedlist(v.begin(), v.end(), slhead);
                 print_linkedlist(slhead);
+                append_linkedlist(slhead, 8);
+                print_linkedlist(slhead);
+                reverse_linkedlist(slhead);
+                print_linkedlist(slhead);
                 destory_linkedlist(slhead);
                 cout << "double linked list..." << endl;
                 dlnode<int> *dlhead = nullptr;

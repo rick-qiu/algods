@@ -103,5 +103,28 @@ namespace algods {
             }
             cout << endl;
         }
+
+        template<typename T>
+        void reverse_linkedlist(slnode<T>*& head) {
+            slnode<T>* prev = nullptr;
+            while(head != nullptr && head->next != nullptr) {
+                auto next = head->next;
+                head->next = prev;
+                prev = head;
+                head = next;
+            }
+            if(head != nullptr) {
+                head->next = prev;
+            }
+        }
+
+        template<typename T>
+        void append_linkedlist(slnode<T>*& head, const T& data) {
+            slnode<T>** current = &head;
+            while(*current != nullptr) {
+                current = &((*current)->next);
+            }
+            *current = new slnode<T>(data, nullptr);
+        }
     }
 }

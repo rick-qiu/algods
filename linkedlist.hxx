@@ -27,8 +27,8 @@ namespace algods {
         template<typename input_iterator>
         void build_linkedlist(input_iterator begin, input_iterator end,
                               slnode<typename iterator_traits<input_iterator>::value_type>*& head) {
-            typedef typename iterator_traits<input_iterator>::value_type value_type;
-            typedef slnode<value_type> node_t;
+            typedef typename iterator_traits<input_iterator>::value_type value_t;
+            typedef slnode<value_t> node_t;
             node_t **current = &head;
             while(begin != end) {
                 *current = new node_t(*begin, nullptr);
@@ -40,8 +40,8 @@ namespace algods {
         template<typename input_iterator>
         void build_linkedlist(input_iterator begin, input_iterator end,
                               dlnode<typename iterator_traits<input_iterator>::value_type>*& head) {
-            typedef typename iterator_traits<input_iterator>::value_type value_type;
-            typedef dlnode<value_type> node_t;
+            typedef typename iterator_traits<input_iterator>::value_type value_t;
+            typedef dlnode<value_t> node_t;
             node_t *prev = nullptr;
             node_t **current = &head;
             while(begin != end) {

@@ -126,5 +126,27 @@ namespace algods {
             }
             *current = new slnode<T>(data, nullptr);
         }
+
+        template<typename T>
+        void remove_linkedlist(slnode<T>*& head, slnode<T>*& p) {
+            if(head == nullptr || p == nullptr) {
+                return;
+            }
+            if(head == p) {
+                head = head->next;
+                delete p;
+                p = nullptr;
+                return;
+            }
+            auto current = head;
+            while(current != nullptr && current->next != p) {
+                current = current->next;
+            }
+            if(current != nullptr) {
+                current->next = p->next;
+                delete p;
+                p = nullptr;
+            }
+        }
     }
 }

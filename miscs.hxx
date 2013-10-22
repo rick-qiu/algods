@@ -1,10 +1,21 @@
 
 #include <iterator>
 #include <algorithm>
+#include <string>
 
 namespace algods {
     namespace miscs {
         using namespace std;
+
+        /************************************************************
+        ** "abcbc" => "abcbc"
+        ** "xxxyyyyyyz" => "3x6yz"
+        ** "cccddecc" => "3c2de2c"
+        ** "adef" => "adef"
+        ** "pppppppp" => "8p"
+        ** the source string only contains character in [a-z]
+        ************************************************************/
+        string zipstring(const string& s);
 
         template<typename random_iterator>
         bool __judge(random_iterator begin, random_iterator end,
@@ -47,8 +58,8 @@ namespace algods {
         }
 
         /*****************************************************************************
-        /** determine whether there are two elements in [begin, end) satisfying
-        /** element1 + element2 = sum
+        ** determine whether there are two elements in [begin, end) satisfying
+        ** element1 + element2 = sum
         ******************************************************************************/
         template<typename forward_iterator>
         bool judge(forward_iterator begin, forward_iterator end,

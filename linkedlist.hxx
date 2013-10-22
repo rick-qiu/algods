@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <iterator>
+#include <sstream>
 
 namespace algods {
     namespace linkedlist {
@@ -57,7 +58,7 @@ namespace algods {
         }
 
         template<typename T>
-        void destory_linkedlist(slnode<T>*& head) {
+        void destroy_linkedlist(slnode<T>*& head) {
             while(head != nullptr) {
                 auto p = head;
                 head = head->next;
@@ -80,28 +81,30 @@ namespace algods {
         }
 
         template<typename T>
-        void print_linkedlist(const slnode<T>* head) {
+        string linkedlist2string(const slnode<T>* head) {
+            ostringstream oss;
             while(head != nullptr && head->next != nullptr) {
-                cout << head->data << "->";
+                oss << head->data << "->";
                 head = head->next;
             }
             if(head != nullptr) {
-                cout << head->data;
+                oss << head->data;
             }
-            cout << endl;
+            return oss.str();
         }
 
         template<typename T>
-        void print_linkedlist(const dlnode<T>* head) {
+        string linkedlist2string(const dlnode<T>* head) {
+            ostringstream oss;
             auto pivot = head;
             while(pivot != nullptr && pivot->next != head) {
-                cout << pivot->data << "<->";
+                oss << pivot->data << "<->";
                 pivot = pivot->next;
             }
             if(pivot != nullptr) {
-                cout << pivot->data;
+                oss << pivot->data;
             }
-            cout << endl;
+            return oss.str();
         }
 
         template<typename T>
@@ -119,7 +122,7 @@ namespace algods {
         }
 
         template<typename T>
-        void append_linkedlist(slnode<T>*& head, const T& data) {
+        void append_node(slnode<T>*& head, const T& data) {
             slnode<T>** current = &head;
             while(*current != nullptr) {
                 current = &((*current)->next);
@@ -128,7 +131,7 @@ namespace algods {
         }
 
         template<typename T>
-        void remove_linkedlist(slnode<T>*& head, slnode<T>*& p) {
+        void remove_node(slnode<T>*& head, slnode<T>*& p) {
             if(head == nullptr || p == nullptr) {
                 return;
             }
@@ -146,6 +149,26 @@ namespace algods {
                 current->next = p->next;
                 delete p;
                 p = nullptr;
+            }
+        }
+
+        template<typename T>
+        slnode<T>* find_node(slnode<T>* head, const T& value) {
+            while(head != nullptr) {
+                if(head->data == value) {
+                    return head;
+                }
+                head = head->next;
+            }
+            return nullptr;
+        }
+
+        template<typename T>
+        void difference(slnode<T>*& left, slnode<T>* right) {
+            while(right != nullptr) {
+                auto p = find_node(left, right->data);
+                remove_node(left, p);
+                right = right->next;
             }
         }
     }

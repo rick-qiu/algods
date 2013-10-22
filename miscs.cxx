@@ -22,7 +22,7 @@ namespace algods {
                 ++count[idx(s[i])];
                 if(s[i] != s[i-1]) {
                     if(count[idx(s[i-1])] > 1) {
-                        char ch = static_cast<char>('0' + count[s[i-1]-'a']);
+                        char ch = static_cast<char>('0' + count[idx(s[i-1])]);
                         ret.push_back(ch);
                     }
                     ret.push_back(s[i-1]);

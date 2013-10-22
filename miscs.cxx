@@ -8,9 +8,10 @@ namespace algods {
         using namespace std;
 
         namespace unittest {
+
             int testjudge0() {
                 vector<int> v{4,1,2,5,8,7};
-                if(judge(v.begin(), v.end(), 3)) {
+                if(judge(v.begin(), v.end(), 8)) {
                     cout << "testjudge0 passed!" << endl;
                     return 0;
                 } else {

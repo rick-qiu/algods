@@ -1,4 +1,9 @@
+#ifndef ALGODS_MISCS_HXX
+#define ALGODS_MISCS_HXX
+
 #include "utils.hxx"
+
+#include <cstdlib>
 
 #include <iterator>
 #include <algorithm>
@@ -98,3 +103,4 @@ namespace algods {
         }
     }
 }
+#endif

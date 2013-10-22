@@ -1,4 +1,5 @@
-
+#ifndef ALGODS_UTILS_HXX
+#define ALGODS_UTILS_HXX
 namespace algods {
     namespace utils {
 
@@ -10,18 +11,16 @@ namespace algods {
         struct type_traits<int> {
             const static int zero;
         };
-        const int type_traits<int>::zero = 0;
 
         template<>
         struct type_traits<float> {
             const static float zero;
         };
-        const float type_traits<float>::zero = 0.0f;
 
         template<>
         struct type_traits<double> {
             const static double zero;
         };
-        const double type_traits<double>::zero = 0;
     }
 }
+#endif

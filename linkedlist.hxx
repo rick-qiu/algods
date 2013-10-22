@@ -1,3 +1,5 @@
+#ifndef ALGODS_LINKEDLIST_HXX
+#define ALGODS_LINKEDLIST_HXX
 
 #include <iostream>
 #include <iterator>
@@ -173,3 +175,4 @@ namespace algods {
         }
     }
 }
+#endif

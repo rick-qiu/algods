@@ -1,3 +1,4 @@
+#include "utils.hxx"
 
 #include <iterator>
 #include <algorithm>
@@ -6,6 +7,8 @@
 namespace algods {
     namespace miscs {
         using namespace std;
+
+        using namespace algods::utils;
 
         /************************************************************
         ** "abcbc" => "abcbc"
@@ -16,6 +19,33 @@ namespace algods {
         ** the source string only contains character in [a-z]
         ************************************************************/
         string zipstring(const string& s);
+
+        /***********************************************************
+         **
+         **********************************************************/
+        template<typename input_iterator>
+        typename iterator_traits<input_iterator>::value_type subarray_maxsum(input_iterator begin, input_iterator end) {
+            typedef typename iterator_traits<input_iterator>::value_type value_t;
+            auto maxsum = type_traits<value_t>::zero;
+            auto cursum = type_traits<value_t>::zero;
+            for_each(begin, end, [&](const value_t& e) { cursum += e; cursum = max(cursum, type_traits<value_t>::zero); maxsum = max(maxsum, cursum); });
+            return maxsum;
+        }
+
+        template<typename input_iterator>
+        typename iterator_traits<input_iterator>::value_type subarray_minsum(input_iterator begin, input_iterator end) {
+            typedef typename iterator_traits<input_iterator>::value_type value_t;
+            auto minsum = type_traits<value_t>::zero;
+            auto cursum = type_traits<value_t>::zero;
+            for_each(begin, end, [&](const value_t& e) { cursum += e; cursum = min(cursum, type_traits<value_t>::zero); minsum = min(minsum, cursum); });
+            return minsum;
+        }
+
+        template<typename input_iterator>
+        typename iterator_traits<input_iterator>::value_type subarray_maxabssum(input_iterator begin, input_iterator end) {
+            typedef typename iterator_traits<input_iterator>::value_type value_t;
+            return max(abs(subarray_maxsum(begin, end)), abs(subarray_minsum(begin, end)));
+        }
 
         template<typename random_iterator>
         bool __judge(random_iterator begin, random_iterator end,

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 namespace algods {
     namespace miscs {
@@ -107,6 +108,39 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_subarray_maxsum0() {
+                vector<int> v{-5, 4, -20, 16, -2, -3};
+                if(subarray_maxsum(v.begin(), v.end()) == 16) {
+                    cout << "test_subarray_maxsum0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_subarray_maxsum0 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_subarray_minsum0() {
+                vector<int> v{-5, 4, -20, 16, -2, -3};
+                if(subarray_minsum(v.begin(), v.end()) == -21) {
+                    cout << "test_subarray_minsum0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_subarray_minsum0 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_subarray_maxabssum0() {
+                vector<int> v{-5, 4, -20, 16, -2, -3};
+                if(subarray_maxabssum(v.begin(), v.end()) == 21) {
+                    cout << "test_subarray_maxabssum0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_subarray_maxabssum0 failed!" << endl;
+                    return 1;
+                }
+            }
         }
     }
 }
@@ -119,5 +153,8 @@ int main(int argc, char *argv[]) {
     test_zipstring2();
     test_zipstring3();
     test_zipstring4();
+    test_subarray_maxsum0();
+    test_subarray_minsum0();
+    test_subarray_maxabssum0();
     return 0;
 }

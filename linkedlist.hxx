@@ -12,7 +12,7 @@ namespace algods {
 
         template<typename T>
         struct slnode {
-            slnode<T>(const T& d, slnode<T>* n): data(d), next(n) {
+            slnode(const T& d, slnode* n): data(d), next(n) {
             }
             T data;
             slnode* next;
@@ -20,7 +20,7 @@ namespace algods {
 
         template<typename T>
         struct dlnode {
-            dlnode<T>(const T& d, dlnode<T>* p, dlnode<T>* n) : data(d), prev(p), next(n) {
+            dlnode(const T& d, dlnode* p, dlnode* n) : data(d), prev(p), next(n) {
             }
             T data;
             dlnode* prev;

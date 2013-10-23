@@ -10,9 +10,9 @@ namespace algods {
 
             using namespace std;
 
-            int test_heap0() {
+            int test_binary_heap0() {
                 vector<int> v{3, 6, 1, -1, 8, 2, 10, 2, 9};
-                heap<int> heap(v.begin(), v.end());
+                binary_heap<int> heap(v.begin(), v.end());
                 int i;
                 while(heap.remove(i)) {
                     cout << i << ' ';
@@ -21,9 +21,9 @@ namespace algods {
                 return 0;
             }
 
-            int test_heap1() {
+            int test_binary_heap1() {
                 vector<int> v{3, 6, 1, -1, 8, 2, 10, 2, 9};
-                heap<int, greater<int>> heap(v.begin(), v.end());
+                binary_heap<int, greater<int>> heap(v.begin(), v.end());
                 int i;
                 while(heap.remove(i)) {
                     cout << i << ' ';
@@ -38,7 +38,7 @@ namespace algods {
 
 int main(int argc, char *argv[]) {
     using namespace algods::heap::unittest;
-    test_heap0();
-    test_heap1();
+    test_binary_heap0();
+    test_binary_heap1();
     return 0;
 }

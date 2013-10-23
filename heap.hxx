@@ -15,15 +15,15 @@ namespace algods {
         using namespace std;
 
         /********************************************************************************************
-         ** a heap maintains both Compare(parent, left_child) and Compare(parent, right_child) are
+         ** a binary heap maintains both Compare(parent, left_child) and Compare(parent, right_child) are
          ** true for distinct elements
          *******************************************************************************************/
         template<typename T, typename Compare = std::less<T>, typename Allocator = std::allocator<T>>
-        class heap {
+        class binary_heap {
 
         public:
             template<typename input_iterator>
-            heap(input_iterator begin, input_iterator end) {
+            binary_heap(input_iterator begin, input_iterator end) {
                 while(begin != end) {
                     insert(*begin);
                     ++begin;

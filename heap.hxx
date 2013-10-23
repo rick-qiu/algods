@@ -1,6 +1,8 @@
 #ifndef ALGODS_HEAP_HXX
 #define ALGODS_HEAP_HXX
 
+#include <cassert>
+
 #include <vector>
 #include <functional>
 #include <algorithm>
@@ -57,30 +59,27 @@ namespace algods {
                 e = *items.begin();
                 *items.begin() = *items.rbegin();
                 items.pop_back();
-                index_t idx = 0;
-                index_t left = left_child_index(idx);
-                index_t right = right_child_index(idx);
-                while(left < items.size() || right < items.size()) {
-                    if(left < items.size() && right < items.size()) {
-                        index_t i = left;
-                        if(!comparator(items[i], items[right])) {
-                            i = right;
-                        }
-                        if(!comparator(items[idx], items[i])) {
-                            swap(items[i], items[idx]);
-                            idx = i;
-                            left = left_child_index(idx);
-                            right = right_child_index(idx);
-                        } else {
-                            break;
-                        }
+                index_t parent = 0;
+                index_t left = left_child_index(parent);
+                index_t right = right_child_index(parent);
+                assert(left < right);
+                while(right < items.size()) {
+                    index_t i = left;
+                    if(!comparator(items[i], items[right])) {
+                        i = right;
+                    }
+                    if(!comparator(items[parent], items[i])) {
+                        swap(items[i], items[parent]);
+                        parent = i;
+                        left = left_child_index(parent);
+                        right = right_child_index(parent);
+                        assert(left < right);
                     } else {
-                        // must be left < items.size()
-                        if(!comparator(items[idx], items[left])) {
-                            swap(items[left], items[idx]);
-                        }
                         break;
                     }
+                }
+                if(left < items.size() && !comparator(items[parent], items[left])) {
+                    swap(items[left], items[parent]);
                 }
                 return true;
             }

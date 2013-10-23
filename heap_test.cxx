@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+#include <functional>
 
 namespace algods {
     namespace heap {
@@ -19,6 +20,17 @@ namespace algods {
                 cout << endl;
                 return 0;
             }
+
+            int test_heap1() {
+                vector<int> v{3, 6, 1, -1, 8, 10, 2, 9};
+                min_heap<int, greater<int>> heap(v.begin(), v.end());
+                int i;
+                while(heap.remove(i)) {
+                    cout << i << ' ';
+                }
+                cout << endl;
+                return 0;
+            }
         }
     }
 }
@@ -27,5 +39,6 @@ namespace algods {
 int main(int argc, char *argv[]) {
     using namespace algods::heap::unittest;
     test_heap0();
+    test_heap1();
     return 0;
 }

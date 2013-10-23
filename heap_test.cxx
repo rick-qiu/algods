@@ -11,8 +11,8 @@ namespace algods {
             using namespace std;
 
             int test_heap0() {
-                vector<int> v{3, 6, 1, -1, 8, 10, 2, 9};
-                min_heap<int> heap(v.begin(), v.end());
+                vector<int> v{3, 6, 1, -1, 8, 2, 10, 2, 9};
+                heap<int> heap(v.begin(), v.end());
                 int i;
                 while(heap.remove(i)) {
                     cout << i << ' ';
@@ -22,8 +22,8 @@ namespace algods {
             }
 
             int test_heap1() {
-                vector<int> v{3, 6, 1, -1, 8, 10, 2, 9};
-                min_heap<int, greater<int>> heap(v.begin(), v.end());
+                vector<int> v{3, 6, 1, -1, 8, 2, 10, 2, 9};
+                heap<int, greater<int>> heap(v.begin(), v.end());
                 int i;
                 while(heap.remove(i)) {
                     cout << i << ' ';

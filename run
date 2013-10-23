@@ -12,4 +12,6 @@ fi
 echo ""
 echo "build $1 and run test cases..."
 echo ""
-${BUILD_CMD} utils.cxx $1'.cxx' $1'_test.cxx' -g -o test && ./test && rm test
+COMMAND="${BUILD_CMD} -g utils.cxx $1.cxx $1_test.cxx -o test"
+echo ${COMMAND}
+${COMMAND} && ./test && rm test

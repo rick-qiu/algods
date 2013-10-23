@@ -13,7 +13,8 @@ namespace algods {
         using namespace std;
 
         /********************************************************************************************
-         ** a heap maintains both Compare(parent, left_child) and Compare(parent, right_child) are true
+         ** a heap maintains both Compare(parent, left_child) and Compare(parent, right_child) are
+         ** true for distinct elements
          *******************************************************************************************/
         template<typename T, typename Compare = std::less<T>, typename Allocator = std::allocator<T>>
         class heap {
@@ -30,7 +31,7 @@ namespace algods {
             /***************************************************************************************
              ** add an element into existing heap
              ** algorithm paradigm: incremental approach -- build a solution on existing smaller
-             ** solution, like insertion soorting 
+             ** solution, like insertion sorting 
              ***************************************************************************************/
             bool insert(const T& e) {
                 items.push_back(e);

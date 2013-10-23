@@ -107,6 +107,13 @@ namespace algods {
             container_t items;
             Compare comparator;
         };
+
+        //placeholders
+        class binomial_heap {
+        };
+
+        class fibonacci_heap {
+        };
     }
 }
 

@@ -6,6 +6,8 @@
 #include <iterator>
 #include <algorithm>
 #include <sstream>
+#include <utility>
+
 namespace algods {
     namespace linkedlist {
 
@@ -29,6 +31,26 @@ namespace algods {
             sliterator(slnode<T>* head): current(head) {
             }
 
+            sliterator(const sliterator& right) {
+                current = right.current;
+            }
+
+            sliterator(sliterator&& right) {
+                current = right.current;
+                right.current = nullptr;
+            }
+
+            sliterator& operator=(const sliterator& right) {
+                current = right.current;
+                return *this;
+            }
+
+            sliterator& operator=(sliterator&& right) {
+                current = right.current;
+                right.current = nullptr;
+                return *this;
+            }
+
             sliterator& operator++() {
                 if(nullptr != current) {
                     current = current->next;
@@ -47,11 +69,20 @@ namespace algods {
                 return current->data;
             }
 
-            bool operator==(const sliterator& right) {
+            const T& operator*() const {
+                return this->operator*();
+            }
+
+            T* operator->() {
+                assert(nullptr != current);
+                return &(current->data);
+            }
+
+            bool operator==(const sliterator& right) const {
                 return current == right.current;
             }
 
-            bool operator!=(const sliterator& right) {
+            bool operator!=(const sliterator& right) const {
                 return !(*this == right);
             }
 
@@ -139,8 +170,11 @@ namespace algods {
             sliterator<T> end(linkedlist_end(const_cast<slnode<T>*>(head)));
             ostringstream oss;
             copy(begin, end, ostream_iterator<T>(oss, "->"));
-            string s = oss.str();
-            return s.substr(0, s.size() - 2);
+            string s(oss.str());
+            // remove last "->"
+            s.pop_back();
+            s.pop_back();
+            return s;
         }
 
         template<typename T>

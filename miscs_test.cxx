@@ -104,6 +104,36 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_topk0() {
+                vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
+                copy(c.begin(), c.end(), ostream_iterator<int>(std::cout, " "));
+                cout << endl;
+                auto end = topk(c.begin(), c.end(), 4);
+                copy(c.begin(), end, ostream_iterator<int>(std::cout, " "));
+                cout << endl;
+                return 0;
+            }
+
+            int test_topk1() {
+                vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
+                copy(c.begin(), c.end(), ostream_iterator<int>(std::cout, " "));
+                cout << endl;
+                auto end = topk(c.begin(), c.end(), 9);
+                copy(c.begin(), end, ostream_iterator<int>(std::cout, " "));
+                cout << endl;
+                return 0;
+            }
+
+            int test_topk2() {
+                vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
+                copy(c.begin(), c.end(), ostream_iterator<int>(std::cout, " "));
+                cout << endl;
+                auto end = topk(c.begin(), c.end(), 6);
+                copy(c.begin(), end, ostream_iterator<int>(std::cout, " "));
+                cout << endl;
+                return 0;
+            }
         }
     }
 }
@@ -119,5 +149,8 @@ int main(int argc, char *argv[]) {
     test_subarray_maxsum0();
     test_subarray_minsum0();
     test_subarray_maxabssum0();
+    test_topk0();
+    test_topk1();
+    test_topk2();
     return 0;
 }

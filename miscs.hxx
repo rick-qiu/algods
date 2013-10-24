@@ -4,6 +4,7 @@
 #include "utils.hxx"
 
 #include <cstdlib>
+#include <cassert>
 
 #include <iterator>
 #include <algorithm>
@@ -100,6 +101,38 @@ namespace algods {
         bool judge(forward_iterator begin, forward_iterator end,
                    const typename iterator_traits<forward_iterator>::value_type& sum) {
             return __judge(begin, end, sum, typename iterator_traits<forward_iterator>::iterator_category());
+        }
+
+        template<typename forward_iterator, typename compare = std::less<typename iterator_traits<forward_iterator>::value_type>>
+        forward_iterator topk(forward_iterator begin, forward_iterator end, typename iterator_traits<forward_iterator>::difference_type k) {
+            if(distance(begin, end) <= k) {
+                return end;
+            }
+            typedef typename iterator_traits<forward_iterator>::difference_type diff_t;
+            compare cmp;
+            auto pivot = begin;
+            while(true) {
+                auto last = pivot;
+                auto current = pivot;
+                ++current;
+                for(; current != end; ++current) {
+                    if(cmp(*pivot, *current)) {
+                        ++last;
+                        swap(*last, *current);
+                    }
+                    swap(*pivot, *last);
+                }
+                auto d = distance(begin, pivot);
+                if(k == d) {
+                    break;
+                } else if(k > d) {
+                    ++pivot;
+                } else {
+                    end = pivot;
+                    pivot = begin;
+                }
+            }
+            return pivot;
         }
     }
 }

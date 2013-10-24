@@ -1,10 +1,11 @@
 #ifndef ALGODS_LINKEDLIST_HXX
 #define ALGODS_LINKEDLIST_HXX
 
-#include <iostream>
-#include <iterator>
-#include <sstream>
+#include <cassert>
 
+#include <iterator>
+#include <algorithm>
+#include <sstream>
 namespace algods {
     namespace linkedlist {
 
@@ -17,6 +18,56 @@ namespace algods {
             T data;
             slnode* next;
         };
+
+        template<typename T>
+        class sliterator : public iterator<forward_iterator_tag, T> {
+
+        public:
+            sliterator(): current(nullptr) {
+            }
+
+            sliterator(slnode<T>* head): current(head) {
+            }
+
+            sliterator& operator++() {
+                if(nullptr != current) {
+                    current = current->next;
+                }
+                return *this;
+            }
+
+            sliterator operator++(int) {
+                sliterator ret(*this);
+                ++(*this);
+                return ret;
+            }
+
+            T& operator*() {
+                assert(nullptr != current);
+                return current->data;
+            }
+
+            bool operator==(const sliterator& right) {
+                return current == right.current;
+            }
+
+            bool operator!=(const sliterator& right) {
+                return !(*this == right);
+            }
+
+        private:
+            slnode<T>* current;
+        };
+
+        template<typename T>
+        sliterator<T> linkedlist_begin(slnode<T>* head) {
+            return sliterator<T>(head);
+        }
+
+        template<typename T>
+        sliterator<T> linkedlist_end(slnode<T>* head) {
+            return sliterator<T>();
+        }
 
         template<typename T>
         struct dlnode {
@@ -84,15 +135,12 @@ namespace algods {
 
         template<typename T>
         string linkedlist2string(const slnode<T>* head) {
+            sliterator<T> begin(linkedlist_begin(const_cast<slnode<T>*>(head)));
+            sliterator<T> end(linkedlist_end(const_cast<slnode<T>*>(head)));
             ostringstream oss;
-            while(head != nullptr && head->next != nullptr) {
-                oss << head->data << "->";
-                head = head->next;
-            }
-            if(head != nullptr) {
-                oss << head->data;
-            }
-            return oss.str();
+            copy(begin, end, ostream_iterator<T>(oss, "->"));
+            string s = oss.str();
+            return s.substr(0, s.size() - 2);
         }
 
         template<typename T>

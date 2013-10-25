@@ -103,36 +103,32 @@ namespace algods {
             return __judge(begin, end, sum, typename iterator_traits<forward_iterator>::iterator_category());
         }
 
+        /******************************************************************************
+         ** given [begin, end), return an iterator it so that [begin, it) contains top
+         ** k elements sarisfying compare
+         *****************************************************************************/
         template<typename forward_iterator, typename compare = std::less<typename iterator_traits<forward_iterator>::value_type>>
         forward_iterator topk(forward_iterator begin, forward_iterator end, typename iterator_traits<forward_iterator>::difference_type k) {
-            if(distance(begin, end) <= k) {
-                return end;
-            }
             typedef typename iterator_traits<forward_iterator>::difference_type diff_t;
             compare cmp;
-            auto pivot = begin;
-            while(true) {
-                auto last = pivot;
-                auto current = pivot;
-                ++current;
-                for(; current != end; ++current) {
-                    if(cmp(*pivot, *current)) {
+            while(distance(begin, end) > k) {
+                auto last = begin;
+                for(auto current = begin + 1; current != end; ++current) {
+                    if(cmp(*begin, *current)) {
                         ++last;
                         swap(*last, *current);
                     }
-                    swap(*pivot, *last);
                 }
-                auto d = distance(begin, pivot);
-                if(k == d) {
-                    break;
-                } else if(k > d) {
-                    ++pivot;
+                swap(*begin, *last);
+                const diff_t dist = distance(begin, last);
+                if(dist >= k) {
+                    end = last;
                 } else {
-                    end = pivot;
-                    pivot = begin;
+                    begin = last + 1;
+                    k -= dist + 1;
                 }
             }
-            return pivot;
+            return end;
         }
     }
 }

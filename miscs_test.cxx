@@ -1,6 +1,7 @@
 #include "miscs.hxx"
 
 #include <vector>
+#include <set>
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -107,32 +108,44 @@ namespace algods {
 
             int test_topk0() {
                 vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
-                copy(c.begin(), c.end(), ostream_iterator<int>(std::cout, " "));
-                cout << endl;
                 auto end = topk(c.begin(), c.end(), 4);
-                copy(c.begin(), end, ostream_iterator<int>(std::cout, " "));
-                cout << endl;
-                return 0;
+                set<int> result(c.begin(), end);
+                set<int> expected{6, 5, 4, 3};
+                if(result == expected) {
+                    cout << "test_topk0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_topk0 failed!" << endl;
+                    return 1;
+                }
             }
 
             int test_topk1() {
                 vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
-                copy(c.begin(), c.end(), ostream_iterator<int>(std::cout, " "));
-                cout << endl;
                 auto end = topk(c.begin(), c.end(), 9);
-                copy(c.begin(), end, ostream_iterator<int>(std::cout, " "));
-                cout << endl;
-                return 0;
+                set<int> result(c.begin(), end);
+                set<int> expected{5, 3, 4, -1, 0, 2, 6, 1};
+                if(result == expected) {
+                    cout << "test_topk1 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_topk1 failed!" << endl;
+                    return 1;
+                }
             }
 
             int test_topk2() {
                 vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
-                copy(c.begin(), c.end(), ostream_iterator<int>(std::cout, " "));
-                cout << endl;
                 auto end = topk(c.begin(), c.end(), 6);
-                copy(c.begin(), end, ostream_iterator<int>(std::cout, " "));
-                cout << endl;
-                return 0;
+                set<int> result(c.begin(), end);
+                set<int> expected{5, 3, 4, 2, 6, 1};
+                if(result == expected) {
+                    cout << "test_topk2 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_topk2 failed!" << endl;
+                    return 1;
+                }
             }
         }
     }

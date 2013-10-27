@@ -179,8 +179,7 @@ namespace algods {
             copy(begin, end, ostream_iterator<T>(oss, "->"));
             string s(oss.str());
             // remove last "->"
-            s.pop_back();
-            s.pop_back();
+            s = s.substr(0, s.size() - 2);
             return "{" + s + "}";
         }
 

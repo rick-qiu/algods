@@ -1,6 +1,7 @@
 #include "miscs.hxx"
 
 #include <vector>
+#include <set>
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -104,6 +105,48 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_topk0() {
+                vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
+                auto end = topk(c.begin(), c.end(), 4);
+                set<int> result(c.begin(), end);
+                set<int> expected{6, 5, 4, 3};
+                if(result == expected) {
+                    cout << "test_topk0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_topk0 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_topk1() {
+                vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
+                auto end = topk(c.begin(), c.end(), 9);
+                set<int> result(c.begin(), end);
+                set<int> expected{5, 3, 4, -1, 0, 2, 6, 1};
+                if(result == expected) {
+                    cout << "test_topk1 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_topk1 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_topk2() {
+                vector<int> c = {5, 3, 4, -1, 0, 2, 6, 1};
+                auto end = topk(c.begin(), c.end(), 6);
+                set<int> result(c.begin(), end);
+                set<int> expected{5, 3, 4, 2, 6, 1};
+                if(result == expected) {
+                    cout << "test_topk2 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_topk2 failed!" << endl;
+                    return 1;
+                }
+            }
         }
     }
 }
@@ -119,5 +162,8 @@ int main(int argc, char *argv[]) {
     test_subarray_maxsum0();
     test_subarray_minsum0();
     test_subarray_maxabssum0();
+    test_topk0();
+    test_topk1();
+    test_topk2();
     return 0;
 }

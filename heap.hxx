@@ -33,24 +33,18 @@ namespace algods {
             /***************************************************************************************
              ** add an element into existing heap
              ** algorithm paradigm: incremental approach -- build a solution on existing smaller
-             ** solution, like insertion sorting 
+             ** solution, like insertion sorting, see bottopm_adjust
              ***************************************************************************************/
             bool insert(const T& e) {
                 items.push_back(e);
-                index_t idx = items.size() - 1;
-                index_t parent = parent_index(idx);
-                while(parent >= 0 && !comparator(items[parent], items[idx])) {
-                    swap(items[idx], items[parent]);
-                    idx = parent;
-                    parent = parent_index(idx);
-                }
+                bottom_adjust();
                 return true;
             }
 
             /**************************************************************************************
              ** remove element at top
              ** algorithm paradigm: decrease-and-conquer -- gradually decrease the scale of the
-             ** problem
+             ** problem, see top_adjust
              *************************************************************************************/
             bool remove(T& e) {
                 if(items.empty()) {
@@ -59,6 +53,41 @@ namespace algods {
                 e = *items.begin();
                 *items.begin() = *items.rbegin();
                 items.pop_back();
+                top_adjust();
+                return true;
+            }
+
+            bool top(T& e) {
+                if(items.empty()) {
+                    return false;
+                }
+                e = *items.begin();
+                return true;
+            }
+
+            bool change_top(const T& e) {
+                if(items.empty()) {
+                    return false;
+                }
+                *items.begin() = e;
+                top_adjust();
+                return true;
+            }
+
+        private:
+            typedef vector<T, Allocator> container_t;
+            typedef int index_t;
+            index_t parent_index(index_t idx) {
+                return ((idx + 1) >> 1) - 1;
+            }
+            index_t left_child_index(index_t idx) {
+                return (idx + 1) << 1 - 1;
+            }
+            index_t right_child_index(index_t idx) {
+                return (idx + 1) << 1;
+            }
+            // ONLY the first element might violate the heap property
+            void top_adjust() {
                 index_t parent = 0;
                 index_t left = left_child_index(parent);
                 index_t right = right_child_index(parent);
@@ -81,28 +110,16 @@ namespace algods {
                 if(left < items.size() && !comparator(items[parent], items[left])) {
                     swap(items[left], items[parent]);
                 }
-                return true;
             }
-
-            bool top(T& e) {
-                if(items.empty()) {
-                    return false;
+            // ONLY the last element might violate the heap property
+            void bottom_adjust() {
+                index_t idx = items.size() - 1;
+                index_t parent = parent_index(idx);
+                while(parent >= 0 && !comparator(items[parent], items[idx])) {
+                    swap(items[idx], items[parent]);
+                    idx = parent;
+                    parent = parent_index(idx);
                 }
-                e = *items.begin();
-                return true;
-            }
-
-        private:
-            typedef vector<T, Allocator> container_t;
-            typedef int index_t;
-            index_t parent_index(index_t idx) {
-                return ((idx + 1) >> 1) - 1;
-            }
-            index_t left_child_index(index_t idx) {
-                return (idx + 1) << 1 - 1;
-            }
-            index_t right_child_index(index_t idx) {
-                return (idx + 1) << 1;
             }
             container_t items;
             Compare comparator;

@@ -49,7 +49,7 @@ namespace algods {
             }
             vector<string> dict2{"", "S", "B", "Q"};
             vector<string> unit{"", "W", "Y", "Z"};
-            string result;
+            vector<string> temp;
             unsigned m = 10;
             unsigned k = 0;
             unsigned h = 0;
@@ -57,16 +57,18 @@ namespace algods {
                 if(h >= 4) {
                     ++k;
                     h = 0;
-                    result.insert(0, unit[k]);
+                    temp.push_back(unit[k]);
                 }
                 auto j = n % m;
                 n /= m;
                 if(j != 0) {
-                    result.insert(0, dict2[h]);
+                    temp.push_back(dict2[h]);
                 }
-                result.insert(0, dict1[j]);
+                temp.push_back(dict1[j]);
                 ++h;
             }
+            string result;
+            for_each(temp.rbegin(), temp.rend(), [&result](const string& s){ result.append(s);});
             return result;
         }
     }

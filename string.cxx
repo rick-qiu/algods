@@ -41,5 +41,30 @@ namespace algods {
             }
             return std::string::npos;
         }
+
+        void remove_space(std::string& s) {
+            const static char space = ' ';
+            auto next_pos = std::string::size_type(0);
+            auto cur_pos = std::string::size_type(0);
+            auto space_count = 0;
+            auto size = 0;
+            while(cur_pos < s.size()) {
+                if(s[cur_pos] != space) {
+                    s[next_pos] = s[cur_pos];
+                    ++next_pos;
+                    space_count = 0;
+                    size  = next_pos;
+                }
+                if(s[cur_pos] == space) {
+                    if(space_count < 1 && next_pos != 0) {
+                        s[next_pos] = space;
+                        ++next_pos;
+                    }
+                    ++space_count;
+                }
+                ++cur_pos;
+            }
+            s.resize(size);
+        }
     }
 }

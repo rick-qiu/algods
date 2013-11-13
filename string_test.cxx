@@ -7,62 +7,140 @@ namespace algods {
     namespace string {
         namespace unittest {
 
-            int test_both_empty_string() {
+            int test_kmp_both_empty_string() {
                 auto result = kmp("", "");
                 auto expected = std::string::npos;
                 if(result == expected) {
-                    std::cout << "test_both_empty_string passed!" << std::endl;
+                    std::cout << "test_kmp_both_empty_string passed!" << std::endl;
                     return 0;
                 } else {
-                    std::cout << "test_both_empty_string failed!" << std::endl;
+                    std::cout << "test_kmp_both_empty_string failed!" << std::endl;
                     return 1;
                 }
             }
 
-            int test_pattern_empty_string() {
+            int test_kmp_pattern_empty_string() {
                 auto result = kmp("I am an engineer", "");
                 auto expected = 0;
                 if(result == expected) {
-                    std::cout << "test_pattern_empty_string passed!" << std::endl;
+                    std::cout << "test_kmp_pattern_empty_string passed!" << std::endl;
                     return 0;
                 } else {
-                    std::cout << "test_pattern_empty_string failed!" << std::endl;
+                    std::cout << "test_kmp_pattern_empty_string failed!" << std::endl;
                     return 1;
                 }
             }
 
-            int test_text_empty_string() {
+            int test_kmp_text_empty_string() {
                 auto result = kmp("", "pattern");
                 auto expected = std::string::npos;
                 if(result == expected) {
-                    std::cout << "test_text_empty_string passed!" << std::endl;
+                    std::cout << "test_kmp_text_empty_string passed!" << std::endl;
                     return 0;
                 } else {
-                    std::cout << "test_text_empty_string failed!" << std::endl;
+                    std::cout << "test_kmp_text_empty_string failed!" << std::endl;
                     return 1;
                 }
             }
 
-            int test_exist() {
+            int test_kmp_exist() {
                 auto result = kmp("I am an engineer", "engineer");
                 auto expected = 8;
                 if(result == expected) {
-                    std::cout << "test_exist passed!" << std::endl;
+                    std::cout << "test_kmp_exist passed!" << std::endl;
                     return 0;
                 } else {
-                    std::cout << "test_exist failed!" << std::endl;
+                    std::cout << "test_kmp_exist failed!" << std::endl;
                     return 1;
                 }
             }
 
-            int test_not_exist() {
+            int test_kmp_not_exist() {
                 auto result = kmp("I am an engineer", "software");
                 auto expected = std::string::npos;
                 if(result == expected) {
-                    std::cout << "test_not_exist passed!" << std::endl;
+                    std::cout << "test_kmp_not_exist passed!" << std::endl;
                     return 0;
                 } else {
-                    std::cout << "test_not_exist failed!" << std::endl;
+                    std::cout << "test_kmp_not_exist failed!" << std::endl;
+                    return 1;
+                }
+            }
+
+            int test_remove_space_normal() {
+                auto result = std::string("I      love          yahoo!");
+                auto expected = std::string("I love yahoo!");
+                remove_space(result);
+                if(result == expected) {
+                    std::cout << "test_remove_space_normal passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_remove_space_normal failed!" << std::endl;
+                    return 1;
+                }
+            }
+
+            int test_remove_space_leading() {
+                auto result = std::string("          yahoo!");
+                auto expected = std::string("yahoo!");
+                remove_space(result);
+                if(result == expected) {
+                    std::cout << "test_remove_space_leading passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_remove_space_leading failed!" << std::endl;
+                    return 1;
+                }
+            }
+
+            int test_remove_space_tail() {
+                auto result = std::string("yahoo!     ");
+                auto expected = std::string("yahoo!");
+                remove_space(result);
+                if(result == expected) {
+                    std::cout << "test_remove_space_tail passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_remove_space_tail failed!" << std::endl;
+                    return 1;
+                }
+            }
+
+            int test_remove_space_empty() {
+                auto result = std::string("");
+                auto expected = std::string("");
+                remove_space(result);
+                if(result == expected) {
+                    std::cout << "test_remove_space_empty passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_remove_space_empty failed!" << std::endl;
+                    return 1;
+                }
+            }
+
+            int test_remove_space_empty_result() {
+                auto result = std::string("     ");
+                auto expected = std::string("");
+                remove_space(result);
+                if(result == expected) {
+                    std::cout << "test_remove_space_empty_result passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_remove_space_empty_result failed!" << std::endl;
+                    return 1;
+                }
+            }
+
+            int test_remove_space_both() {
+                auto result = std::string("    I love yahoo!    ");
+                auto expected = std::string("I love yahoo!");
+                remove_space(result);
+                if(result == expected) {
+                    std::cout << "test_remove_space_both passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_remove_space_both failed!" << std::endl;
                     return 1;
                 }
             }
@@ -73,11 +151,17 @@ namespace algods {
 int main(int argc, char *argv[]) {
     using namespace algods::string::unittest;
     int count = 0;
-    count += test_both_empty_string();
-    count += test_pattern_empty_string();
-    count += test_text_empty_string();
-    count += test_exist();
-    count += test_not_exist();
+    count += test_kmp_both_empty_string();
+    count += test_kmp_pattern_empty_string();
+    count += test_kmp_text_empty_string();
+    count += test_kmp_exist();
+    count += test_kmp_not_exist();
+    count += test_remove_space_normal();
+    count += test_remove_space_leading();
+    count += test_remove_space_tail();
+    count += test_remove_space_empty();
+    count += test_remove_space_empty_result();
+    count += test_remove_space_both();
 
     std::cout << std::endl;
     if(count == 0) {

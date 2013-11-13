@@ -147,6 +147,90 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_translate0() {
+                string expected = "IQIIBIIISIV";
+                string result = translate(1234);
+                if(expected == result) {
+                    cout << "test_translate0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_translate0 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_translate1() {
+                string expected = "IWIIQIIIBIVSV";
+                string result = translate(12345);
+                if(expected == result) {
+                    cout << "test_translate1 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_translate1 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_translate2() {
+                string expected = "IYIIQIIIBIVSVWVIQVIIBVIIISIX";
+                string result = translate(123456789);
+                if(expected == result) {
+                    cout << "test_translate2 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_translate3 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_translate3() {
+                string expected = "V";
+                string result = translate(5);
+                if(expected == result) {
+                    cout << "test_translate3 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_translate3 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_translate4() {
+                string expected = "IQIIBOIV";
+                string result = translate(1204);
+                if(expected == result) {
+                    cout << "test_translate4 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_translate4 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_translate5() {
+                string expected = "IWOIIBIIISIV";
+                string result = translate(10234);
+                if(expected == result) {
+                    cout << "test_translate5 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_translate5 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_translate6() {
+                string expected = "IVSIIYIXQIVBIXSVIWVIIQIIBIXSV";
+                string result = translate(4294967295);
+                if(expected == result) {
+                    cout << "test_translate6 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_translate6 failed!" << endl;
+                    return 1;
+                }
+            }
         }
     }
 }
@@ -165,5 +249,12 @@ int main(int argc, char *argv[]) {
     test_topk0();
     test_topk1();
     test_topk2();
+    test_translate0();
+    test_translate1();
+    test_translate2();
+    test_translate3();
+    test_translate4();
+    test_translate5();
+    test_translate6();
     return 0;
 }

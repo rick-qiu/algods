@@ -8,6 +8,8 @@
 namespace algods {
     namespace miscs {
 
+        using namespace std;
+
         string zipstring(const string& s) {
             string ret;
             if(s.empty()) {
@@ -38,6 +40,34 @@ namespace algods {
                 ret.push_back(s[i-1]);
             }
             return ret;
+        }
+
+        string translate(unsigned n) {
+            vector<string> dict1{"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+            if(n < 10) {
+                return dict1[n];
+            }
+            vector<string> dict2{"", "S", "B", "Q"};
+            vector<string> unit{"", "W", "Y", "Z"};
+            string result;
+            unsigned m = 10;
+            unsigned k = 0;
+            unsigned h = 0;
+            while(n > 0) {
+                if(h >= 4) {
+                    ++k;
+                    h = 0;
+                    result.insert(0, unit[k]);
+                }
+                auto j = n % m;
+                n /= m;
+                if(j != 0) {
+                    result.insert(0, dict2[h]);
+                }
+                result.insert(0, dict1[j]);
+                ++h;
+            }
+            return result;
         }
     }
 }

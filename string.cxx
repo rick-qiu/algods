@@ -13,7 +13,7 @@ namespace algods {
             std::vector<long long> shifts(pattern.size(), -1);
             long long q = -1;
             for(auto i = 1; i < pattern.size(); ++i) {
-                while(q >= 0 && pattern[q] != pattern[i]) {
+                while(q >= 0 && pattern[q + 1] != pattern[i]) {
                     q = shifts[q];
                 }
                 if(pattern[q + 1] == pattern[i]) {
@@ -113,7 +113,7 @@ namespace algods {
             std::vector<long long> shifts(pattern.size(), pattern.size());
             auto q = pattern.size();
             for(long long i = pattern.size() - 2; i >= 0; --i) {
-                while(q < pattern.size() && pattern[q] != pattern[i]) {
+                while(q < pattern.size() && pattern[q - 1] != pattern[i]) {
                     q = pattern[q];
                 }
                 if(pattern[q - 1] == pattern[i]) {
@@ -138,7 +138,7 @@ namespace algods {
             }
             long long q = pattern.size();
             for(long long i = pos; i >= 0; --i) {
-                while(q < pattern.size() && pattern[q] != text[i]) {
+                while(q < pattern.size() && pattern[q - 1] != text[i]) {
                     q = reverse_shifts[q];
                 }
                 if(pattern[q - 1] == text[i]) {
@@ -160,15 +160,15 @@ namespace algods {
             auto reverse_shifts = reverse_kmp_prefix_func(p);
             std::string::size_type pos = s.size() - 1;
             long long count = 0;
-            while((pos = kmp(s, pos, p, reverse_shifts)) != std::string::npos) {
+            while((pos = reverse_kmp(s, pos, p, reverse_shifts)) != std::string::npos) {
                 ++count;
             }
             auto size = s.size();
-            s.resize(s.size() - count * (r.size() - p.size()));
+            s.resize(s.size() + count * (r.size() - p.size()));
             pos = size - 1;
             auto end = pos;
             auto idx = s.size() - 1;
-            while((pos = kmp(s, pos, p, reverse_shifts)) != std::string::npos) {
+            while((pos = reverse_kmp(s, pos, p, reverse_shifts)) != std::string::npos) {
                 for(auto i = end; i >= pos + p.size(); --i, --idx, --end) {
                     s[idx] = s[end];
                 }
@@ -185,24 +185,10 @@ namespace algods {
         void replace(std::string& s, const std::string& p, const std::string& r) {
             if(p.size() == r.size()) {
                 replace_equal(s, p, r);
-                return;
             } else if(p.size() > r.size()) {
                 replace_greater(s, p, r);
-                return;
             } else {
                 replace_less(s, p, r);
-                return;
-                /*std::string::size_type pos = 0;
-                while((pos = kmp(s, pos, p)) != std::string::npos) {
-                    s.resize(s.size() + r.size() - p.size());
-                    for(auto i = s.size() - 1, j = s.size() - 1 - r.size() + p.size(); i >= pos + p.size(); --i, --j) {
-                        s[i] = s[j];
-                    }
-                    for(auto i = pos, j = std::string::size_type(0); j < r.size(); ++i, ++j) {
-                        s[i] = r[j];
-                    }
-                    pos += r.size();
-                    }*/
             }
         }
 

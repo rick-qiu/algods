@@ -170,7 +170,7 @@ namespace algods {
                     std::cout << "test_replace1 passed!" << std::endl;
                     return 0;
                 } else {
-                    std::cout << "test_replace1 failed!" <<s<< std::endl;
+                    std::cout << "test_replace1 failed!" << std::endl;
                     return 1;
                 }
             }

@@ -113,7 +113,7 @@ namespace algods {
             std::vector<long long> shifts(pattern.size(), pattern.size());
             auto q = pattern.size();
             for(long long i = pattern.size() - 2; i >= 0; --i) {
-                while(q < pattern.size() && pattern[q - 1] != pattern[i]) {
+                while(q < pattern.size() && pattern[q] != pattern[i]) {
                     q = pattern[q];
                 }
                 if(pattern[q - 1] == pattern[i]) {
@@ -138,7 +138,7 @@ namespace algods {
             }
             long long q = pattern.size();
             for(long long i = pos; i >= 0; --i) {
-                while(q < pattern.size() && pattern[q - 1] != text[i]) {
+                while(q < pattern.size() && pattern[q] != text[i]) {
                     q = reverse_shifts[q];
                 }
                 if(pattern[q - 1] == text[i]) {

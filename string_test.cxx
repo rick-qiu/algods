@@ -144,6 +144,51 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_replace0() {
+                std::string p("abc");
+                std::string r("e");
+                std::string s("I am a student abc, no words abcdf");
+                std::string expected("I am a student e, no words edf");
+                replace(s, p, r);
+                if(s == expected) {
+                    std::cout << "test_replace0 passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_replace0 failed!" << std::endl;
+                    return 1;
+                }
+            }
+            
+            int test_replace1() {
+                std::string p("abc");
+                std::string r("IVIISD");
+                std::string s("I am a student abc, no words abcdf");
+                std::string expected("I am a student IVIISD, no words IVIISDdf");
+                replace(s, p, r);
+                if(s == expected) {
+                    std::cout << "test_replace1 passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_replace1 failed!" <<s<< std::endl;
+                    return 1;
+                }
+            }
+
+            int test_replace2() {
+                std::string p("abc");
+                std::string r("def");
+                std::string s("I am a student abc, no words abcdf");
+                std::string expected("I am a student def, no words defdf");
+                replace(s, p, r);
+                if(s == expected) {
+                    std::cout << "test_replace2 passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_replace2 failed!" << std::endl;
+                    return 1;
+                }
+            }
         }
     }
 }
@@ -162,6 +207,9 @@ int main(int argc, char *argv[]) {
     count += test_remove_space_empty();
     count += test_remove_space_empty_result();
     count += test_remove_space_both();
+    count += test_replace0();
+    count += test_replace1();
+    count += test_replace2();
 
     std::cout << std::endl;
     if(count == 0) {

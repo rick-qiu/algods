@@ -189,6 +189,21 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_replace3() {
+                std::string p("ABCDABD");
+                std::string r("");
+                std::string s("ABC ABCDAB ABCDABCDABDE");
+                std::string expected("ABC ABCDAB ABCDE");
+                replace(s, p, r);
+                if(s == expected) {
+                    std::cout << "test_replace3 passed!" << std::endl;
+                    return 0;
+                } else {
+                    std::cout << "test_replace3 failed!" << std::endl;
+                    return 1;
+                }
+            }
         }
     }
 }
@@ -210,6 +225,7 @@ int main(int argc, char *argv[]) {
     count += test_replace0();
     count += test_replace1();
     count += test_replace2();
+    count += test_replace3();
 
     std::cout << std::endl;
     if(count == 0) {

@@ -40,7 +40,7 @@ namespace algods {
         /*******************************************************************
          ** encode a byte stream with run length encoding
          ******************************************************************/
-        string run_length_encode(const string& s);
+        vector<unsigned char> run_length_encode(const vector<unsigned char>& bytes);
 
         /***********************************************************
          **

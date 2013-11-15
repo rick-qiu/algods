@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <sstream>
+#include <limits>
 
 namespace algods {
     namespace miscs {
@@ -16,30 +17,26 @@ namespace algods {
             if(s.empty()) {
                 return ret;
             }
-            auto idx = [](char ch)->int { return ch - 'a';};
-            ret.reserve(s.size());
-            constexpr int size = 'z' - 'a' + 1;
-            int count[size] = {};
-            int i = 0;
-            ++count[idx(s[i])];
-            for(i = 1; i < s.size(); ++i) {
-                ++count[idx(s[i])];
-                if(s[i] != s[i-1]) {
-                    if(count[idx(s[i-1])] > 1) {
-                        char ch = static_cast<char>('0' + count[idx(s[i-1])]);
-                        ret.push_back(ch);
-                    }
-                    ret.push_back(s[i-1]);
-                    count[idx(s[i-1])] = 0;
+            auto last = s[0];
+            auto count = 1;
+            auto append = [&ret, &last, &count](){
+                if(count > 1) { 
+                    ostringstream oss;
+                    oss << count;
+                    ret.append(oss.str());
+                }
+                ret.push_back(last);
+            };
+            for(auto i = 1; i < s.size(); ++i) {
+                if(s[i] == last) {
+                    ++count;
+                } else {
+                    append();
+                    last = s[i];
+                    count = 1;
                 }
             }
-            if(count[idx(s[i-1])] != 0) {
-                if(count[idx(s[i-1])] > 1) {
-                    char ch = static_cast<char>('0' + count[idx(s[i-1])]);
-                    ret.push_back(ch);
-                }
-                ret.push_back(s[i-1]);
-            }
+            append();
             return ret;
         }
 
@@ -91,29 +88,34 @@ namespace algods {
             }
         }
 
-        string run_length_encode(const string& s) {
-            string result;
-            if(s.size() <= 0) {
+        vector<unsigned char> run_length_encode(const vector<unsigned char>& bytes) {
+            vector<unsigned char> result;
+            if(bytes.size() == 0) {
                 return result;
             }
-            auto last = s[0];
+            auto last = bytes[0];
             auto count = 1;
-            for(auto i = 1; i < s.size(); ++i) {
-                if(s[i] == last) {
+            auto append = [&result, &last, &count](){
+                while(count > numeric_limits<unsigned char>::max()) {
+                    result.push_back(numeric_limits<unsigned char>::max());
+                    result.push_back(last);
+                    count -= numeric_limits<unsigned char>::max();
+                }
+                if(count != 0) {
+                    result.push_back(static_cast<unsigned char>(count));
+                    result.push_back(last);
+                }
+            };
+            for(auto i = 1; i < bytes.size(); ++i) {
+                if(bytes[i] == last) {
                     ++count;
                 } else {
-                    ostringstream oss;
-                    oss << count;
-                    result.append(oss.str());
-                    result.push_back(last);
-                    last = s[i];
+                    append();
+                    last = bytes[i];
                     count = 1;
                 }
             }
-            ostringstream oss;
-            oss << count;
-            result.append(oss.str());
-            result.push_back(last);
+            append();
             return result;
         }
     }

@@ -233,9 +233,9 @@ namespace algods {
             }
 
             int test_run_length_encode0() {
-                string s;
-                const string expected;
-                auto result = run_length_encode(s);
+                vector<unsigned char> bytes;
+                const vector<unsigned char> expected;
+                auto result = run_length_encode(bytes);
                 if(expected == result) {
                     cout << "test_run_length_encode0 passed!" << endl;
                     return 0;
@@ -246,9 +246,9 @@ namespace algods {
             }
 
             int test_run_length_encode1() {
-                string s("W");
-                const string expected("1W");
-                auto result = run_length_encode(s);
+                vector<unsigned char> bytes{100};
+                const vector<unsigned char> expected{1,100};
+                auto result = run_length_encode(bytes);
                 if(expected == result) {
                     cout << "test_run_length_encode1 passed!" << endl;
                     return 0;
@@ -259,9 +259,9 @@ namespace algods {
             }
 
             int test_run_length_encode2() {
-                string s("WWWWWWWW");
-                const string expected("8W");
-                auto result = run_length_encode(s);
+                vector<unsigned char> bytes{100, 100, 100, 100, 100, 100, 100, 100};
+                const vector<unsigned char> expected{8,100};
+                auto result = run_length_encode(bytes);
                 if(expected == result) {
                     cout << "test_run_length_encode2 passed!" << endl;
                     return 0;
@@ -272,9 +272,9 @@ namespace algods {
             }
 
             int test_run_length_encode3() {
-                string s("WWWWWWWWWWWWWWWWWWWW");
-                const string expected("20W");
-                auto result = run_length_encode(s);
+                vector<unsigned char> bytes{100,100,100,50,50,20,20,20};
+                const vector<unsigned char> expected{3,100,2,50,3,20};
+                auto result = run_length_encode(bytes);
                 if(expected == result) {
                     cout << "test_run_length_encode3 passed!" << endl;
                     return 0;
@@ -285,27 +285,14 @@ namespace algods {
             }
 
             int test_run_length_encode4() {
-                string s("ABCDEFG");
-                const string expected("1A1B1C1D1E1F1G");
-                auto result = run_length_encode(s);
+                vector<unsigned char> bytes(300, 100);
+                const vector<unsigned char> expected{255, 100, 45, 100};
+                auto result = run_length_encode(bytes);
                 if(expected == result) {
                     cout << "test_run_length_encode4 passed!" << endl;
                     return 0;
                 } else {
                     cout << "test_run_length_encode4 failed!" << endl;
-                    return 1;
-                }
-            }
-
-            int test_run_length_encode5() {
-                string s("ABBBCCD");
-                const string expected("1A3B2C1D");
-                auto result = run_length_encode(s);
-                if(expected == result) {
-                    cout << "test_run_length_encode5 passed!" << endl;
-                    return 0;
-                } else {
-                    cout << "test_run_length_encode5 failed!" << endl;
                     return 1;
                 }
             }
@@ -339,6 +326,5 @@ int main(int argc, char *argv[]) {
     test_run_length_encode2();
     test_run_length_encode3();
     test_run_length_encode4();
-    test_run_length_encode5();
     return 0;
 }

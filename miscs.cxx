@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <sstream>
 
 namespace algods {
     namespace miscs {
@@ -69,6 +70,50 @@ namespace algods {
             }
             string result;
             for_each(temp.rbegin(), temp.rend(), [&result](const string& s){ result.append(s);});
+            return result;
+        }
+
+        void reorder(vector<int>& vi) {
+            auto i = vector<int>::size_type(0);
+            auto j = vi.size() - 1;
+            while(i < j) {
+                while(i < vi.size() && vi[i] % 2 != 0) {
+                    ++i;
+                }
+                while(j >= 0 && vi[j] % 2 == 0) {
+                    --j;
+                }
+                if(i < j) {
+                    swap(vi[i], vi[j]);
+                    ++i;
+                    --j;
+                }
+            }
+        }
+
+        string run_length_encode(const string& s) {
+            string result;
+            if(s.size() <= 0) {
+                return result;
+            }
+            auto last = s[0];
+            auto count = 1;
+            for(auto i = 1; i < s.size(); ++i) {
+                if(s[i] == last) {
+                    ++count;
+                } else {
+                    ostringstream oss;
+                    oss << count;
+                    result.append(oss.str());
+                    result.push_back(last);
+                    last = s[i];
+                    count = 1;
+                }
+            }
+            ostringstream oss;
+            oss << count;
+            result.append(oss.str());
+            result.push_back(last);
             return result;
         }
     }

@@ -62,6 +62,26 @@ namespace algods {
             return kmp(text, 0, pattern);
         }
 
+        std::string::size_type naive_match(const std::string& text,
+                                           std::string::size_type pos,
+                                           const std::string& pattern) {
+            if(pos + pattern.size() > text.size()) {
+                return std::string::npos;
+            }
+            for(auto i = pos; i <= text.size() - pattern.size(); ++i) {
+                auto k = 0;
+                for(auto j = i; k < pattern.size(); ++j; ++k) {
+                    if(text[j] != pattern[k]) {
+                        break;
+                    }
+                }
+                if(k == pattern.size()) {
+                    return i;
+                }
+            }
+            return std::string::npos;
+        }
+
         /********************************************************************************
          ** O(n) on time, O(1) on space
          ********************************************************************************/

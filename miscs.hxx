@@ -146,6 +146,29 @@ namespace algods {
             }
             return end;
         }
+
+
+        /****************************************************************************
+         ** given an unsorted sequence a, delta = a[i] - a[j] (i > j)
+         ** compute the maximum delta
+         ***************************************************************************/
+        template<typename forward_iterator, typename compare = std::less<typename iterator_traits<forward_iterator>::value_type>>
+        typename iterator_traits<forward_iterator>::value_type max_delta(forward_iterator begin, forward_iterator end) {
+
+            assert(distance(begin, end) > 2 && "the number of elements should NOT be less than 2");
+
+            using value_t = typename iterator_traits<forward_iterator>::value_type;
+
+            compare cmp;
+            auto min_v = std::min(*begin, *(begin + 1), cmp);
+            auto max_delta = *(begin + 1) - *begin;
+            for_each(begin + 2, end, [&](const value_t& v) {
+                    auto delta = v - min_v;
+                    max_delta = std::max(max_delta, delta, cmp);
+                    min_v = std::min(v, min_v, cmp);
+                });
+            return max_delta;
+        }
     }
 }
 #endif

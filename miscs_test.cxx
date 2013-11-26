@@ -296,6 +296,32 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_max_delta0() {
+                vector<int> v{1, 2, 3, 4, 5};
+                int expected = 4;
+                auto result = max_delta(v.begin(), v.end());
+                if(expected == result) {
+                    cout << "test_max_delat0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_max_delata0 failed!" << endl;
+                    return 1;
+                }
+            }
+
+            int test_max_delta1() {
+                vector<int> v{5, 4, 3, 2, 1};
+                int expected = -1;
+                auto result = max_delta(v.begin(), v.end());
+                if(expected == result) {
+                    cout << "test_max_delat1 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_max_delata1 failed!" << endl;
+                    return 1;
+                }
+            }
         }
     }
 }
@@ -326,5 +352,7 @@ int main(int argc, char *argv[]) {
     test_run_length_encode2();
     test_run_length_encode3();
     test_run_length_encode4();
+    test_max_delta0();
+    test_max_delta1();
     return 0;
 }

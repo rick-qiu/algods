@@ -200,15 +200,13 @@ namespace algods {
         template<typename T>
         void reverse_linkedlist(slnode<T>*& head) {
             slnode<T>* prev = nullptr;
-            while(head != nullptr && head->next != nullptr) {
+            while(head != nullptr) {
                 auto next = head->next;
                 head->next = prev;
                 prev = head;
                 head = next;
             }
-            if(head != nullptr) {
-                head->next = prev;
-            }
+            head = prev;
         }
 
         template<typename T>

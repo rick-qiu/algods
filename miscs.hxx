@@ -169,6 +169,43 @@ namespace algods {
                 });
             return max_delta;
         }
+
+        /*****************************************************************************
+         ** find the maximum and minimum
+         ****************************************************************************/
+        template<typename forward_iterator, typename compare = std::less<typename iterator_traits<forward_iterator>::value_type>>
+        void find_max_min(forward_iterator begin, forward_iterator end,
+                          typename iterator_traits<forward_iterator>::value_type& max,
+                          typename iterator_traits<forward_iterator>::value_type& min) {
+            assert(distance(begin, end) >= 1 && "the number of elements should NOT be less than 1");
+            max = *begin;
+            min = *begin;
+            ++begin;
+            compare cmp;
+            while(distance(begin, end) >= 2) {
+                auto smaller = *begin;
+                ++begin;
+                auto larger = *begin;
+                ++begin;
+                if(cmp(larger, smaller)) {
+                    std::swap(smaller, larger);
+                }
+                if(cmp(smaller, min)) {
+                    min = smaller;
+                }
+                if(cmp(max, larger)) {
+                    max = larger;
+                }
+            }
+            if(begin != end) {
+                if(cmp(*begin, min)) {
+                    min = *begin;
+                }
+                if(cmp(max, *begin)) {
+                    max = *begin;
+                }
+            }
+        }
     }
 }
 #endif

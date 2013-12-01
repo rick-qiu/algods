@@ -322,6 +322,21 @@ namespace algods {
                     return 1;
                 }
             }
+
+            int test_find_max_min0() {
+                vector<int> v{5, 4, 3, 2, 1};
+                auto expected_min = 1;
+                auto expected_max = 5;
+                int max, min;
+                find_max_min(v.begin(), v.end(), max, min);
+                if(expected_max == max && expected_min == min) {
+                    cout << "test_find_max_min0 passed!" << endl;
+                    return 0;
+                } else {
+                    cout << "test_find_max_min0 failed!" << endl;
+                    return 1;
+                }
+            }
         }
     }
 }
@@ -354,5 +369,6 @@ int main(int argc, char *argv[]) {
     test_run_length_encode4();
     test_max_delta0();
     test_max_delta1();
+    test_find_max_min0();
     return 0;
 }

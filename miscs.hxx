@@ -177,12 +177,13 @@ namespace algods {
         void find_max_min(forward_iterator begin, forward_iterator end,
                           typename iterator_traits<forward_iterator>::value_type& max,
                           typename iterator_traits<forward_iterator>::value_type& min) {
-            assert(distance(begin, end) >= 1 && "the number of elements should NOT be less than 1");
+            auto count = distance(begin, end);
+            assert(count >= 1 && "the number of elements should NOT be less than 1");
             max = *begin;
             min = *begin;
             ++begin;
             compare cmp;
-            while(distance(begin, end) >= 2) {
+            for(auto i = 1; i + 2 <= count; i += 2) {
                 auto smaller = *begin;
                 ++begin;
                 auto larger = *begin;
